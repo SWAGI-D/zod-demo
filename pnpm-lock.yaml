@@ -8,9 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@vee-validate/zod':
+        specifier: ^4.13.1
+        version: 4.13.1(vue@3.4.27(typescript@4.5.5))
       core-js:
         specifier: ^3.8.3
         version: 3.37.1
+      vee-validate:
+        specifier: ^4.13.1
+        version: 4.13.1(vue@3.4.27(typescript@4.5.5))
       vue:
         specifier: ^3.2.13
         version: 3.4.27(typescript@4.5.5)
@@ -20,6 +26,12 @@ importers:
       vuex:
         specifier: ^4.0.0
         version: 4.1.0(vue@3.4.27(typescript@4.5.5))
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+      zod-validation-error:
+        specifier: ^3.3.0
+        version: 3.3.0(zod@3.23.8)
     devDependencies:
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.4.0
@@ -922,6 +934,9 @@ packages:
   '@typescript-eslint/visitor-keys@5.62.0':
     resolution: {integrity: sha512-07ny+LHRzQXepkGg6w0mFY41fVUNBrL2Roj/++7V1txKugfjm/Ci/qSND03r2RhlJhJYMcTn9AhhSSqQp0Ysyw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@vee-validate/zod@4.13.1':
+    resolution: {integrity: sha512-8QLhY1vFNURT5rJF9GK34Rf9I/4Fx7CmF1rWeLEOYDshLzX0IxD6ByVEnIDl96Bu90A3wJSsZiXZNiv/yOyLbQ==}
 
   '@vue/babel-helper-vue-jsx-merge-props@1.4.0':
     resolution: {integrity: sha512-JkqXfCkUDp4PIlFdDQ0TdXoIejMtTHP67/pvxlgeY+u5k3LEdKuWZ3LK6xkxo52uDoABIVyRwqVkfLQJhk7VBA==}
@@ -3700,6 +3715,10 @@ packages:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
 
+  type-fest@4.19.0:
+    resolution: {integrity: sha512-CN2l+hWACRiejlnr68vY0/7734Kzu+9+TOslUXbSCQ1ruY9XIHDBSceVXCcHm/oXrdzhtLMMdJEKfemf1yXiZQ==}
+    engines: {node: '>=16'}
+
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
@@ -3768,6 +3787,11 @@ packages:
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
+
+  vee-validate@4.13.1:
+    resolution: {integrity: sha512-JAlUWTBHg0z66n+v66mrtE9IC1xmVCggzpyc7UXCNkizVok8Zgt1VAVjobSxA/0N19Zn6v6hRfjoYciYH/Z11Q==}
+    peerDependencies:
+      vue: ^3.4.26
 
   vue-eslint-parser@8.3.0:
     resolution: {integrity: sha512-dzHGG3+sYwSf6zFBa0Gi9ZDshD7+ad14DGOdTLjruRVgZXe2J+DcZ9iUhyR48z5g1PqRa20yt3Njna/veLJL/g==}
@@ -3989,6 +4013,15 @@ packages:
   yorkie@2.0.0:
     resolution: {integrity: sha512-jcKpkthap6x63MB4TxwCyuIGkV0oYP/YRyuQU5UO0Yz/E/ZAu+653/uov+phdmO54n6BcvFRyyt0RRrWdN2mpw==}
     engines: {node: '>=4'}
+
+  zod-validation-error@3.3.0:
+    resolution: {integrity: sha512-Syib9oumw1NTqEv4LT0e6U83Td9aVRk9iTXPUQr1otyV1PuXQKOvOwhMNqZIq5hluzHP2pMgnOmHEo7kPdI2mw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      zod: ^3.18.0
+
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
 snapshots:
 
@@ -5105,6 +5138,14 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 5.62.0
       eslint-visitor-keys: 3.4.3
+
+  '@vee-validate/zod@4.13.1(vue@3.4.27(typescript@4.5.5))':
+    dependencies:
+      type-fest: 4.19.0
+      vee-validate: 4.13.1(vue@3.4.27(typescript@4.5.5))
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - vue
 
   '@vue/babel-helper-vue-jsx-merge-props@1.4.0': {}
 
@@ -8067,6 +8108,8 @@ snapshots:
 
   type-fest@0.8.1: {}
 
+  type-fest@4.19.0: {}
+
   type-is@1.6.18:
     dependencies:
       media-typer: 0.3.0
@@ -8117,6 +8160,12 @@ snapshots:
       spdx-expression-parse: 3.0.1
 
   vary@1.1.2: {}
+
+  vee-validate@4.13.1(vue@3.4.27(typescript@4.5.5)):
+    dependencies:
+      '@vue/devtools-api': 6.6.3
+      type-fest: 4.19.0
+      vue: 3.4.27(typescript@4.5.5)
 
   vue-eslint-parser@8.3.0(eslint@7.32.0):
     dependencies:
@@ -8436,3 +8485,9 @@ snapshots:
       is-ci: 1.2.1
       normalize-path: 1.0.0
       strip-indent: 2.0.0
+
+  zod-validation-error@3.3.0(zod@3.23.8):
+    dependencies:
+      zod: 3.23.8
+
+  zod@3.23.8: {}
