@@ -1,62 +1,35 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <VForm @submit.prevent="onSubmit">
     <div>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" v-model="formData.name" required/>
-      <div v-if="errors?.name">
-        <span v-for="error in errors.name._errors" :key="error">
-          {{  error }}
-        </span>
-      </div>
+      <VTextField label="Name" type="text" id="name" name="name" v-model="formData.name" :error-messages="validationErrors.name"/>
     </div>
     <div>
-      <label for="age">Age:</label>
-      <input type="number" id="age" name="age" v-model="formData.age" required/>
-      <div v-if="errors?.age">
-        <span v-for="error in errors.age._errors" :key="error">
-          {{  error }}
-        </span>
-      </div>
+      <VNumberInput label="Age" type="number" id="age" name="age" v-model="formData.age" :error-messages="validationErrors.age" required/>
     </div>
     <div>
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email" v-model="formData.email" required/>
-      <div v-if="errors?.email">
-        <span v-for="error in errors.email._errors" :key="error">
-          {{  error }}
-        </span>
-      </div>
+      <VTextField label="Email" type="email" id="email" name="email" v-model="formData.email" :error-messages="validationErrors.email"/>
     </div>
     <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" v-model="formData.password"/>
-      <div v-if="errors?.password">
-        <span v-for="error in errors.password._errors" :key="error">
-          {{  error }}
-        </span>
-      </div>
+      <VTextField label="Password" type="password" id="password" name="password" v-model="formData.password" :error-messages="validationErrors.password"/>
     </div>
     <div>
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" v-model="formData.confirmPassword"/>
+      <VTextField label="Confirm Password" type="password" id="confirmPassword" name="confirmPassword" v-model="formData.confirmPassword" :error-messages="validationErrors.confirmPassword"/>
     </div>
-    <div v-if="errors?.confirmPassword">
-        <span v-for="error in errors.confirmPassword._errors" :key="error">
-          {{  error }}
-        </span>
-      </div>
     <button type="submit">Submit</button>
-  </form>
+  </VForm>
 </template>
 
 <script setup lang="ts">
 import { z } from 'zod';
-import {ref} from 'vue';
+import {ref, reactive} from 'vue';
+import {VForm, VTextField} from 'vuetify/components'
+import { VNumberInput } from 'vuetify/lib/labs/components.mjs';
 
+const errorMessage = ref('')
 
 const EmployeeSchema = z.object({
   name: z.string().min(3, {message: "Name should contain at least 3 letters"}),
-  age: z.number({message: "Age should only be a number"}).gt(10, {message: "Age should be greater than 10"}),
+  age: z.number().gt(10, {message: "Age should be greater than 10"}),
   email: z.string().email({message: "Please enter a valid email"}),
   password: z.string().min(8, "Password should contain at least 8 characters"),
   confirmPassword: z.string().min(8, "Password should contain at least 8 characters"),
@@ -77,18 +50,41 @@ const formData = ref({
   confirmPassword: ""
 })
 
-function onSubmit()
+const validationErrors = reactive<
+    Record<keyof Employee, string[]>
+  >({
+    name: [],
+    age: [],
+    email: [],
+    password: [],
+    confirmPassword: []
+
+  })
+
+function validateForm()
 {
   const validSchema = EmployeeSchema.safeParse(formData.value)
 
-  if(!validSchema.success)
-  {
-    errors.value = validSchema.error.format()
+  if (!validSchema.success) {
+      validSchema.error.errors.forEach((err) => {
+        validationErrors[err.path[0] as keyof Employee] = [
+          err.message,
+        ]
+      })
+      return false
+    }
+    return true
+}
+
+function onSubmit()
+{
+  try{
+    validateForm()
   }
 
-  else
+  catch(error: any)
   {
-    errors.value = null
+    errorMessage.value = error.message || 'An error occurred'
   }
 }
 
@@ -136,4 +132,3 @@ button:hover {
   background-color: #0056b3;
 }
 </style>
-
