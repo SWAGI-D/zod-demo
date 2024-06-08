@@ -91,44 +91,55 @@ function onSubmit()
 </script>
 
 <style>
+/* Style for the form container */
 form {
   max-width: 400px;
   margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-div {
+/* Style for form inputs */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
   margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
 }
 
+/* Style for form input labels */
 label {
   display: block;
   font-weight: bold;
 }
 
-input[type="text"],
-input[type="number"],
-input[type="date"],
-select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-span {
+/* Style for error messages */
+.error-message {
   color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
+/* Style for submit button */
+button[type="submit"] {
+  background-color: #4caf50;
   color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+/* Style for submit button on hover */
+button[type="submit"]:hover {
+  background-color: #45a049;
 }
+
 </style>
